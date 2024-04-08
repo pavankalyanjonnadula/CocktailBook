@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,16 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfY-NX-vjx">
-                        <rect key="frame" x="16" y="16" width="288" height="20"/>
+                        <rect key="frame" x="16" y="16" width="258" height="21.666666666666671"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Plo-cg-vCo"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Plo-cg-vCo"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcI-Vi-OIq">
-                        <rect key="frame" x="16" y="41" width="288" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcI-Vi-OIq">
+                        <rect key="frame" x="16" y="42.666666666666664" width="288" height="29.999999999999993"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="omf-tU-UqR"/>
                         </constraints>
@@ -37,21 +38,34 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6m-FV-nty">
-                        <rect key="frame" x="0.0" y="87" width="320" height="0.6666666666666714"/>
+                        <rect key="frame" x="0.0" y="88.666666666666671" width="320" height="0.6666666666666714"/>
                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.59999999999999998" id="a0f-cM-SF7"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UDx-Wi-CzK">
+                        <rect key="frame" x="279" y="16" width="25" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="YCF-D6-UXs"/>
+                            <constraint firstAttribute="height" constant="22" id="tWf-bH-ZPn"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal">
+                            <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="gcI-Vi-OIq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="BvR-cU-sJ1"/>
                     <constraint firstAttribute="trailing" secondItem="F6m-FV-nty" secondAttribute="trailing" id="TRW-4f-wXn"/>
-                    <constraint firstAttribute="trailing" secondItem="qfY-NX-vjx" secondAttribute="trailing" constant="16" id="VDx-Ta-Soz"/>
+                    <constraint firstItem="UDx-Wi-CzK" firstAttribute="leading" secondItem="qfY-NX-vjx" secondAttribute="trailing" constant="5" id="UzB-nC-r0c"/>
                     <constraint firstAttribute="bottom" secondItem="F6m-FV-nty" secondAttribute="bottom" id="YYh-K8-2Hq"/>
                     <constraint firstItem="F6m-FV-nty" firstAttribute="top" secondItem="gcI-Vi-OIq" secondAttribute="bottom" constant="16" id="Zo6-b4-zSc"/>
+                    <constraint firstItem="UDx-Wi-CzK" firstAttribute="centerY" secondItem="qfY-NX-vjx" secondAttribute="centerY" id="adl-EE-DoP"/>
                     <constraint firstItem="gcI-Vi-OIq" firstAttribute="top" secondItem="qfY-NX-vjx" secondAttribute="bottom" constant="5" id="bS1-gh-zoJ"/>
                     <constraint firstItem="qfY-NX-vjx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="dLO-Cy-pQe"/>
+                    <constraint firstAttribute="trailing" secondItem="UDx-Wi-CzK" secondAttribute="trailing" constant="16" id="iM4-rf-zc1"/>
                     <constraint firstItem="qfY-NX-vjx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="jna-ln-FkJ"/>
                     <constraint firstAttribute="trailing" secondItem="gcI-Vi-OIq" secondAttribute="trailing" constant="16" id="qk6-S5-JFd"/>
                     <constraint firstItem="F6m-FV-nty" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wCD-yl-beP"/>
@@ -61,11 +75,13 @@
             <connections>
                 <outlet property="cocktailDescrption" destination="gcI-Vi-OIq" id="Vqp-aY-xmf"/>
                 <outlet property="cocktailTitle" destination="qfY-NX-vjx" id="s8L-MI-2OX"/>
+                <outlet property="favouriteBtn" destination="UDx-Wi-CzK" id="a2x-24-cg7"/>
             </connections>
             <point key="canvasLocation" x="-160.30534351145039" y="23.591549295774648"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <systemColor name="systemGray4Color">
             <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

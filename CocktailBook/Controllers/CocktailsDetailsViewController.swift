@@ -12,14 +12,13 @@ protocol UpdateCocktailsDelegate{
 import UIKit
 
 class CocktailsDetailsViewController: UIViewController {
-//    @IBOutlet weak var heightOfStackview: NSLayoutConstraint!
     
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var cocktailsImage: UIImageView!
     @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var ingrediantsStackView: UIStackView!
     @IBOutlet weak var favouriteBtn: UIBarButtonItem!
-    
+
     var cocktailDetails : Cocktails?
     var isFavourite = false
     var delegate : UpdateCocktailsDelegate?
@@ -42,7 +41,6 @@ class CocktailsDetailsViewController: UIViewController {
         navigationItem.title = cocktailDetails?.name ?? ""
         cocktailsImage.image = UIImage(named: cocktailDetails?.imageName ?? "margarita")
         minutesLabel.text = "\(cocktailDetails?.preparationMinutes ?? 0) minutes"
-//        heightOfStackview.constant = CGFloat((cocktailDetails?.ingredients?.count ?? 0) * 30)
         cocktailDetails?.ingredients?.forEach({ ingrediant in
             ingredientsSubview(ingredients: ingrediant)
         })
@@ -63,10 +61,10 @@ class CocktailsDetailsViewController: UIViewController {
     }
     
     func ingredientsSubview(ingredients : String){
-        print("the ingrediants",ingredients)
-        let ingrediatsView = IngrediantsView()
-        ingrediatsView.ingrediantsLabel.text = ingredients
-        ingrediantsStackView.addArrangedSubview(ingrediatsView)
+        print(ingredients)
+        let ingrediantsView = IngrediantsView()
+        ingrediantsView.setText(ingredients)
+        ingrediantsStackView.addArrangedSubview(ingrediantsView)
     }
     
 }

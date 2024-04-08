@@ -8,6 +8,7 @@
 import UIKit
 
 class CocktailsTableViewCell: UITableViewCell {
+    @IBOutlet weak var favouriteBtn: UIButton!
     
     @IBOutlet weak var cocktailDescrption: UILabel!
     @IBOutlet weak var cocktailTitle: UILabel!
