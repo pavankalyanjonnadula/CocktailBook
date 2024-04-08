@@ -10,10 +10,13 @@ import Foundation
 class MainScreenViewModel {
     
     @Published var cocktailsList : [Cocktails] = []
-    //private let cocktailsAPI: CocktailsAPI = FakeCocktailsAPI(withFailure: .count(3))
-    private let cocktailsAPI: CocktailsAPI = FakeCocktailsAPI()
+    private let cocktailsAPI: CocktailsAPI
     var cocktailsListCopy  : [Cocktails] = []
     @Published var isErrorReceived = false
+    
+    init(cocktailsAPI: CocktailsAPI) {
+        self.cocktailsAPI = cocktailsAPI
+    }
     
     fileprivate func decodeThedata(cocktailData : Data) {
         let decoder = JSONDecoder()

@@ -12,7 +12,7 @@ class MainScreenViewController: UIViewController {
     @IBOutlet var cocktailSegmentController: UISegmentedControl!
     @IBOutlet weak var cocktailsTableView: UITableView!
     
-    let viewModel = MainScreenViewModel()
+    let viewModel = MainScreenViewModel(cocktailsAPI: FakeCocktailsAPI())
     private var cancellables: Set<AnyCancellable> = []
 
     fileprivate func getCocktails() {
