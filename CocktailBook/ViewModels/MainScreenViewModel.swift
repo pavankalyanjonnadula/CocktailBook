@@ -10,8 +10,10 @@ import Foundation
 class MainScreenViewModel {
     
     @Published var cocktailsList : [Cocktails] = []
+    //private let cocktailsAPI: CocktailsAPI = FakeCocktailsAPI(withFailure: .count(3))
     private let cocktailsAPI: CocktailsAPI = FakeCocktailsAPI()
     var cocktailsListCopy  : [Cocktails] = []
+    @Published var isErrorReceived = false
     
     fileprivate func decodeThedata(cocktailData : Data) {
         let decoder = JSONDecoder()
@@ -29,6 +31,9 @@ class MainScreenViewModel {
             if case let .success(data) = result {
                 self.decodeThedata(cocktailData: data)
             }
+            if case .failure(_) = result {
+                self.isErrorReceived = true
+            }
         }
     }
     
@@ -38,7 +43,7 @@ class MainScreenViewModel {
         }else if segmentSelected == 2{
             filterCocktailsAccording(type: .nonalcoholic, cocktials: cocktailsListCopy)
         }else{
-            sortTheCocktails(cocktials: cocktailsListCopy)
+            addFavouriteCocktails(cocktials: cocktailsListCopy)
         }
     }
     
@@ -50,6 +55,8 @@ class MainScreenViewModel {
               var newCocktail = cocktail // Create a copy
                 if favouriteCocktailsIds.contains(cocktail.id ?? "") {
                     newCocktail.favourite = true
+                }else{
+                    newCocktail.favourite = false
                 }
                 return newCocktail
             }
@@ -58,29 +65,43 @@ class MainScreenViewModel {
     }
     
     func sortTheCocktails(cocktials : [Cocktails]){
-        self.cocktailsList = cocktials.sorted(by: { cocktail1, cocktail2 in
-            if cocktail1.favourite != cocktail2.favourite{
-                return cocktail1.favourite
-            }
-            return (cocktail1.name ?? "") < (cocktail2.name ?? "")
-        })
+       
+        let unFavouriteCocktails = getCocktailsDependsOn(isFavourite: false, cokcktails: cocktials)
+        var sortedUnFavouriteCocktails = unFavouriteCocktails.sorted {($0.name ?? "") < ($1.name ?? "")}
+        let favouriteCocktails = getCocktailsDependsOn(isFavourite: true, cokcktails: cocktials)
+        if !favouriteCocktails.isEmpty{
+            let sortedFavouriteCocktails = favouriteCocktails.sorted {($0.name ?? "") < ($1.name ?? "")}
+            sortedUnFavouriteCocktails = sortedFavouriteCocktails + sortedUnFavouriteCocktails
+        }
+        self.cocktailsList = sortedUnFavouriteCocktails
+
     }
     
     func filterCocktailsAccording(type : CocktailTypes,cocktials : [Cocktails]){
+        var filteredCocktails : [Cocktails] = []
         if type == .alcoholic{
-            self.cocktailsList = cocktials.filter({ cocktail in
+            filteredCocktails = cocktials.filter({ cocktail in
                 if cocktail.type == "alcoholic"{
                     return true
                 }
                 return false
             })
         }else if type == .nonalcoholic{
-            self.cocktailsList = cocktials.filter({ cocktail in
+            filteredCocktails = cocktials.filter({ cocktail in
                 if cocktail.type == "non-alcoholic"{
                     return true
                 }
                 return false
             })
+        }
+        addFavouriteCocktails(cocktials: filteredCocktails)
+    }
+    
+    func getCocktailsDependsOn(isFavourite : Bool,cokcktails : [Cocktails]) -> [Cocktails]{
+        if isFavourite{
+            return cokcktails.filter { $0.favourite }
+        }else{
+            return cokcktails.filter { $0.favourite == false }
         }
     }
 }
