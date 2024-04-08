@@ -7,8 +7,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     if let windowScene = scene as? UIWindowScene {
+        let storyboard = UIStoryboard(name: "CocktailsBook", bundle: nil)
+        let initialViewController = storyboard.instantiateInitialViewController()        
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = MainScreenViewController()
+        window.rootViewController = initialViewController
         self.window = window
         window.makeKeyAndVisible()
     }
