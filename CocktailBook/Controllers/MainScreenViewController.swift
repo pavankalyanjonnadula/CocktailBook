@@ -22,20 +22,19 @@ class MainScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initializeTableView()
         getCocktails()
         subscribeToCocktails()
         subscribeToError()
+        subscribeToNavTitle()
         initializeNavigationBar()
         cocktailSegmentController.layer.cornerRadius = 15
-        
-
     }
     
     func initializeNavigationBar(){
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
+        navigationItem.title = viewModel.navigationTitle
     }
     
     func initializeTableView(){
@@ -67,7 +66,12 @@ class MainScreenViewController: UIViewController {
             }.store(in: &cancellables)
     }
     
-    
+    func subscribeToNavTitle(){
+        viewModel.$navigationTitle
+            .sink { [weak self] navTitle in
+                self?.navigationItem.title = navTitle
+            }.store(in: &cancellables)
+    }
     
     
 }

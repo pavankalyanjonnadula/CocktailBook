@@ -13,12 +13,14 @@ class MainScreenViewModel {
     private let cocktailsAPI: CocktailsAPI
     var cocktailsListCopy  : [Cocktails] = []
     @Published var isErrorReceived = false
+    @Published var navigationTitle = "All Cocktails"
+
     
     init(cocktailsAPI: CocktailsAPI) {
         self.cocktailsAPI = cocktailsAPI
     }
     
-    fileprivate func decodeThedata(cocktailData : Data) {
+    func decodeThedata(cocktailData : Data) {
         let decoder = JSONDecoder()
         do{
             let cocktails : [Cocktails] = try decoder.decode([Cocktails].self, from: cocktailData)
@@ -43,10 +45,13 @@ class MainScreenViewModel {
     func switchSelection(segmentSelected : Int){
         if segmentSelected == 1{
             filterCocktailsAccording(type: .alcoholic, cocktials: cocktailsListCopy)
+            navigationTitle = "Alcoholic Cocktails"
         }else if segmentSelected == 2{
             filterCocktailsAccording(type: .nonalcoholic, cocktials: cocktailsListCopy)
+            navigationTitle = "Non-Alcoholic Cocktails"
         }else{
             addFavouriteCocktails(cocktials: cocktailsListCopy)
+            navigationTitle = "All Cocktails"
         }
     }
     
